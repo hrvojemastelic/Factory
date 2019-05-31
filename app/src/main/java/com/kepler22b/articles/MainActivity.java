@@ -215,8 +215,8 @@ public class MainActivity extends AppCompatActivity {
                     realm.copyToRealmOrUpdate(mArticleList);
                     realm.commitTransaction();
 
-                    List<Article> articleitems = realm.copyFromRealm(realm.where(Article.class).findAll());
-                    mFaceAdapter.setMovieInfoList(articleitems);
+                  
+                    mFaceAdapter.setMovieInfoList(mArticleList);
                     mFaceAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
 
