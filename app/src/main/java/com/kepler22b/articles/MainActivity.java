@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (dateTime.isBefore(currenttime)){
-
+                articleitems.clear();
              fetchMovieInfo();
 
             mFaceAdapter.notifyDataSetChanged();
