@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-            List<Article> articleitems = realm.copyFromRealm(realm.where(Article.class).findAll());
+            List<Article> articleitems = realm.copyFromRealm(realm.where(Article.class).findAll().sort("publishedAt", Sort.DESCENDING));
 
             if (articleitems.size() <= 0) {
 
