@@ -106,11 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
                 fetchMovieInfo();
             } else {
-                mArticleList.addAll(articleitems);
-                mFaceAdapter.setMovieInfoList(mArticleList);
-                mFaceAdapter.notifyDataSetChanged();
-                progressBar.setVisibility(View.GONE);
-
+     
                 //Compare time from first item with current time
                 //if time from article is greeter then current time - 5 minutes
 
@@ -204,14 +200,18 @@ public class MainActivity extends AppCompatActivity {
                      List<Article> articleList = response.body().getArticles();
 
 
-                     mArticleList.clear();
-                     mArticleList.addAll(articleList);
+                mArticleList.addAll(articleList);
 
                     realm.beginTransaction();
+                    realm.deleteAll();
+                    realm.delete(Article.class);
                     realm.copyToRealmOrUpdate(mArticleList);
                     realm.commitTransaction();
+                    List<Article> articleitems = realm.copyFromRealm(realm.where(Article.class).findAll().sort("publishedAt", Sort.DESCENDING));
 
-                  
+
+                    mArticleList.clear();
+                    mArticleList.addAll(articleitems);
                     mFaceAdapter.setMovieInfoList(mArticleList);
                     mFaceAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
@@ -231,6 +231,14 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Continue
+                                       List<Article> articleitems = realm.copyFromRealm(realm.where(Article.class).findAll().sort("publishedAt", Sort.DESCENDING));
+
+
+                    mArticleList.clear();
+                    mArticleList.addAll(articleitems);
+                    mFaceAdapter.setMovieInfoList(mArticleList);
+                    mFaceAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
                             }
                         }).show();
 
