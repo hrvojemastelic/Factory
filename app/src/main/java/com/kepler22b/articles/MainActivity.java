@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Realm realm;
     ArrayList<Article> mArticleList;
-    private static final String API_KEY = "6946d0c07a1c4555a4186bfcade76398";
+    private static final String API_KEY = "your-api-key";
     Button retry;
 
 
